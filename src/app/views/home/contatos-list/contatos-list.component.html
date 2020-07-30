@@ -1,0 +1,10 @@
+
+<mat-selection-list #cont [multiple]="false">
+  <mat-list-option *ngFor="let contato of contatosApi" [value]="contato">
+    {{contato.nome}}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>
+  Option selected: {{cont.selectedOptions.selected[0]?.value.nome}}
+</p>
