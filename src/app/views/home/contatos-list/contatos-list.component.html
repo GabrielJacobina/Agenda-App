@@ -1,10 +1,43 @@
 
-<mat-selection-list #cont [multiple]="false">
-  <mat-list-option *ngFor="let contato of contatosApi" [value]="contato">
-    {{contato.nome}}
-  </mat-list-option>
-</mat-selection-list>
-
+<div fxLayout="row" fxLayoutAlign="start center" >
+  <div fxFlex="70%">
+    <mat-selection-list #cont [multiple]="false">
+      <mat-list-option *ngFor="let contato of contatosApi" [value]="contato" (click)="openDialog(contato)">
+        {{contato.nome}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+</div>
 <p>
   Option selected: {{cont.selectedOptions.selected[0]?.value.nome}}
 </p>
+
+<!--Angular Material-->
+<mat-table [dataSource]="contatosApi" class="mat-elevation-z8" style="margin: 3%;">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let contato"> {{contato.id}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let contato"> {{contato.nome}} </mat-cell>
+  </ng-container>
+
+  <!-- Email Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+    <mat-cell *matCellDef="let contato"> {{contato.email}} </mat-cell>
+  </ng-container>
+
+  <!-- Celular Column -->
+  <ng-container matColumnDef="celular">
+    <mat-header-cell *matHeaderCellDef> Celular </mat-header-cell>
+    <mat-cell *matCellDef="let contato"> {{contato.telefone}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

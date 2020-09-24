@@ -8,6 +8,7 @@ import { Contato } from '../model/contato.model'
   providedIn: 'root'
 })
 export class ContatoService {
+  contato: Contato;
 
   apiUrl='http://localhost:8080/contatos';
 
@@ -37,6 +38,15 @@ export class ContatoService {
       )
   }
 
+  public putContato(contato: any): Observable<Contato>{
+    console.log(`No put do service o id é ${this.contato.id} com o nome sendo `)
+    return this.httpClient.put<any>(this.apiUrl + '/' + this.contato.id, contato, this.httpOptions)
+    .pipe(
+      retry(2),
+      catchError(this.handleError)
+    )
+  }
+
   // Manipulação de erros
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
@@ -50,4 +60,12 @@ export class ContatoService {
     console.log(errorMessage);
     return throwError(errorMessage);
   };
+
+  public updateContato(contato){
+    this.contato = contato;
+  }
+
+  public getContato(){
+    return this.contato
+  }
 }

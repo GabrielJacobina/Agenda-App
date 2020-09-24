@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { ContatoService } from 'src/app/shared/service/contato.service';
 import { Contato } from 'src/app/shared/model/contato.model';
+import { ContatosFormDialogComponent } from './contatos-form-dialog/contatos-form-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-contatos-list',
@@ -8,11 +11,11 @@ import { Contato } from 'src/app/shared/model/contato.model';
   styleUrls: ['./contatos-list.component.css']
 })
 export class ContatosListComponent implements OnInit {
-  contatos: string[] = ['João', 'Arya', 'Sonsa', 'Ned', 'Três olhos'];
   contatosApi: Contato[];
 
   constructor(
-    public contatoService: ContatoService
+    public contatoService: ContatoService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void{
@@ -25,4 +28,16 @@ export class ContatosListComponent implements OnInit {
     })
   }
 
+  displayedColumns: string[] = ['id', 'nome', 'email', 'celular'];
+
+  openDialog(contato): void {
+    this.contatoService.updateContato(contato);
+    const dialogRef = this.dialog.open(ContatosFormDialogComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }
