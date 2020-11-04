@@ -38,6 +38,14 @@
     <mat-cell *matCellDef="let contato"> {{contato.telefone}} </mat-cell>
   </ng-container>
 
+  <!-- Ação Column -->
+  <ng-container matColumnDef="acao">
+    <mat-header-cell *matHeaderCellDef> Ação </mat-header-cell>
+    <mat-cell *matCellDef="let contato"> 
+      <button mat-raised-button color="warn" (click)="deletar(contato)">Deletar</button> 
+    </mat-cell>
+  </ng-container>
+
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 </mat-table>

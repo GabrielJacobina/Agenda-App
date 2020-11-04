@@ -28,7 +28,7 @@ export class ContatosListComponent implements OnInit {
     })
   }
 
-  displayedColumns: string[] = ['id', 'nome', 'email', 'celular'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'celular', 'acao'];
 
   openDialog(contato): void {
     this.contatoService.updateContato(contato);
@@ -38,6 +38,12 @@ export class ContatosListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  deletar(contato: Contato): void {
+    this.contatoService.deleteContato(contato).subscribe(() => {
+      this.getContatos();
     });
   }
 }

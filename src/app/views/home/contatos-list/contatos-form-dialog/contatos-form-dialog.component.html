@@ -1,4 +1,10 @@
-<h1 mat-dialog-title >Cadastro de contato </h1>
+<div *ngIf="action == 'atualizar'">
+    <h1 mat-dialog-title >Atualizar o contato </h1>
+</div>
+<div *ngIf="action == 'cadastrar'">
+    <h1 mat-dialog-title >Cadastro de contato </h1>
+</div>
+<!--<h1 mat-dialog-title >Cadastro de contato </h1>-->
 <div mat-dialog-content>
     <form [formGroup]="contatoForm">
         <mat-form-field>

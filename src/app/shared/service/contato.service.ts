@@ -31,6 +31,7 @@ export class ContatoService {
   }
 
   public postContatos(contato: any): Observable<Contato>{
+    console.log('No método post')
     return this.httpClient.post<any>(this.apiUrl, contato, this.httpOptions)
       .pipe(
         retry(2),
@@ -67,5 +68,14 @@ export class ContatoService {
 
   public getContato(){
     return this.contato
+  }
+
+  public deleteContato(contato: Contato) {
+    console.log(`A url ficou  ${this.apiUrl}/${contato.id}`);
+    return this.httpClient.delete<Contato>(this.apiUrl + '/' + contato.id, this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
   }
 }
