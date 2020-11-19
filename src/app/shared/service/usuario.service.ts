@@ -8,7 +8,8 @@ import { retry, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  usuario: Usuario;
+  private usuario: Usuario;
+  private usuarioAutenticado: boolean;
 
   apiUrl='http://localhost:8080/usuarios';
 
@@ -28,6 +29,15 @@ export class UsuarioService {
         retry(2),
         catchError(this.handleError)
         )
+  }
+
+  public verificarUsuario(usuario: Usuario): Observable<boolean>{
+    console.log('No método verificarUsuario')
+    return this.httpClient.post<boolean>(this.apiUrl + "/login", usuario, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
   }
 
 

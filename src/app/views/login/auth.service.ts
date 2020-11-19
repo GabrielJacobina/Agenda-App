@@ -1,32 +1,19 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/model/usuario.model';
+import { UsuarioService } from 'src/app/shared/service/usuario.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-
   private usuarioAutenticado: boolean = false;
-  constructor(private router: Router) { }
+  constructor() { }
 
-  fazerLogin(usuario: Usuario, usuarios: Usuario[]){
-    for(let i = 0; i <= usuarios.length; i++){
-      if (usuario.usuario === usuarios[i].usuario &&
-      usuario.senha === usuarios[i].senha) {
-      this.usuarioAutenticado = true;
-
-      this.router.navigate(['/']);
-      }
-    }
-
-    this.usuarioAutenticado = false;
-    
+  autenticar(usuarioAut: boolean){
+    this.usuarioAutenticado = usuarioAut;
   }
-
-  
-
   usuarioEstaAutenticado(){
     return this.usuarioAutenticado;
   }
