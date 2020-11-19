@@ -13,7 +13,7 @@ import { ContatosListComponent } from '../contatos-list.component';
 export class ContatosFormDialogComponent implements OnInit {
   public contatoForm: FormGroup;
   contato: Contato;
-  public action: String;
+  public action: string;
 
   constructor(
     private fb: FormBuilder,

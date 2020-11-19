@@ -19,13 +19,17 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import { ContatosFormDialogComponent } from './views/home/contatos-list/contatos-form-dialog/contatos-form-dialog.component';
 import {MatInputModule} from '@angular/material/input';
+import { LoginComponent } from './views/login/login.component';
+import { AuthService } from './views/login/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ContatosListComponent,
-    ContatosFormDialogComponent
+    ContatosFormDialogComponent,
+    LoginComponent
   ],
   imports: [
     HttpClientModule,
@@ -45,7 +49,7 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
